@@ -1,9 +1,10 @@
+#include "GameManager.h"
 #include <Novice.h>
 
 const char kWindowTitle[] = "GC2D_02_アリミズ_ユウタ_タイトル";
 
 // Windowsアプリでのエントリーポイント(main関数)
-int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ライブラリの初期化
 	Novice::Initialize(kWindowTitle, 1280, 720);
@@ -24,6 +25,17 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 		///
 		/// ↓更新処理ここから
 		///
+		// 生成
+		GameManager* gameManager = new GameManager();
+
+		// ゲーム実行
+		gameManager->Run();
+
+		// 解放
+		delete gameManager;
+
+		// ライブラリの終了
+		Novice::Finalize();
 
 		///
 		/// ↑更新処理ここまで
