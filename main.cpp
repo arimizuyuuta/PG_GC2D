@@ -3,62 +3,20 @@
 
 const char kWindowTitle[] = "GC2D_02_アリミズ_ユウタ_タイトル";
 
-// Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
-
-	// ライブラリの初期化
+	// Noviceの初期化
 	Novice::Initialize(kWindowTitle, 1280, 720);
 
-	// キー入力結果を受け取る箱
-	char keys[256] = {0};
-	char preKeys[256] = {0};
+	// ゲームマネージャー生成（1回だけ）
+	GameManager* gameManager = new GameManager();
 
-	// ウィンドウの×ボタンが押されるまでループ
-	while (Novice::ProcessMessage() == 0) {
-		// フレームの開始
-		Novice::BeginFrame();
+	// ゲーム実行（Run 内でループ）
+	gameManager->Run();
 
-		// キー入力を受け取る
-		memcpy(preKeys, keys, 256);
-		Novice::GetHitKeyStateAll(keys);
+	// 解放
+	delete gameManager;
 
-		///
-		/// ↓更新処理ここから
-		///
-		// 生成
-		GameManager* gameManager = new GameManager();
-
-		// ゲーム実行
-		gameManager->Run();
-
-		// 解放
-		delete gameManager;
-
-		// ライブラリの終了
-		Novice::Finalize();
-
-		///
-		/// ↑更新処理ここまで
-		///
-
-		///
-		/// ↓描画処理ここから
-		///
-
-		///
-		/// ↑描画処理ここまで
-		///
-
-		// フレームの終了
-		Novice::EndFrame();
-
-		// ESCキーが押されたらループを抜ける
-		if (preKeys[DIK_ESCAPE] == 0 && keys[DIK_ESCAPE] != 0) {
-			break;
-		}
-	}
-
-	// ライブラリの終了
+	// Noviceの終了
 	Novice::Finalize();
 	return 0;
 }
