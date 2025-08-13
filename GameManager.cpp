@@ -20,6 +20,9 @@ int GameManager::Run() {
 	char keys[256] = {0};
 	char preKeys[256] = {0};
 
+	// 起動時の現在シーンを初期化
+	sceneArr_[currentSceneNo_]->Initialize();
+
 	while (Novice::ProcessMessage() == 0) {
 		Novice::BeginFrame();
 

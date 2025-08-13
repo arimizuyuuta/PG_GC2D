@@ -12,32 +12,31 @@ private:
 	struct Vec2 {
 		float x, y;
 	};
-
 	struct Player {
 		Vec2 pos;
 		float speed;
 		float radius;
 	} player_;
-
 	struct Bullet {
 		Vec2 pos, vel;
 		float radius;
 		bool alive;
 	};
 	std::vector<Bullet> bullets_;
-	int shotCooldown_; // 連射抑制（フレーム）
+	int shotCooldown_;
 
 	struct Enemy {
-		Vec2 pos;
-		Vec2 base;
-		float t; // 動き用タイマ
+		Vec2 pos, base;
+		float t;
 		float radius;
 		bool alive;
-		int deadTimer; // 撃破アニメ用
+		int deadTimer;
 	};
 	std::vector<Enemy> enemies_;
 
-	// ユーティリティ
+	// ★追加：ステージ背景
+	int stageBGTex_ = -1;
+
 	static float LengthSq(const Vec2& a, const Vec2& b) {
 		float dx = a.x - b.x, dy = a.y - b.y;
 		return dx * dx + dy * dy;

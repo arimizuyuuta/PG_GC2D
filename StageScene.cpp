@@ -5,6 +5,9 @@
 #include <cmath>
 
 void StageScene::Initialize() {
+
+	 stageBGTex_ = Novice::LoadTexture("STAGE.png");
+
 	// プレイヤー
 	player_ = {
 	    {640.0f, 620.0f},
@@ -116,6 +119,11 @@ void StageScene::Update(char* keys, char* preKeys) {
 }
 
 void StageScene::Draw() {
+	// 背景
+	if (stageBGTex_ != -1) {
+		Novice::DrawSprite(0, 0, stageBGTex_, 1.0f, 1.0f, 0.0f, 0xFFFFFFFF);
+	}
+
 	// UI
 	Novice::ScreenPrintf(16, 16, "Stage: Arrow Move, Z: Shot");
 	Novice::ScreenPrintf(16, 40, "Beat all enemies to clear!");
